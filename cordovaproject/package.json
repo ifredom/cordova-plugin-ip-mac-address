@@ -15,12 +15,13 @@
   "devDependencies": {
     "cordova-android": "^9.0.0",
     "cordova-plugin-whitelist": "^1.3.4",
-    "ipmacaddress": "file:..\\ipmacaddress"
+    "ipmacaddress": "file:..\\ipmacaddress",
+    "wlanmac": "file:..\\wlanmac"
   },
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},
-      "com.ipmacaddress": {}
+      "com.ifredom.wlanmac": {}
     },
     "platforms": [
       "android"

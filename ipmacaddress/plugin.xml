@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<plugin id="com.ipmacaddress" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
-    <name>ipmacaddress</name>
-    <js-module name="ipmacaddress" src="www/ipmacaddress.js">
-        <clobbers target="cordova.plugins.ipmacaddress" />
-    </js-module>
-</plugin>

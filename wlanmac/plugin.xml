@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com.ifredom.wlanmac" version="1.0.0"
+  xmlns="http://apache.org/cordova/ns/plugins/1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>wlanmac</name>
+  <js-module name="wlanmac" src="www/wlanmac.js">
+    <!-- <clobbers target="cordova.plugins.wlanmac" /> -->
+    <clobbers target="WlanmacPlugin" />
+  </js-module>
+  <platform name="android">
+    <config-file parent="/*" target="res/xml/config.xml">
+      <feature name="wlanmac">
+        <param name="android-package" value="com.ifredom.wlanmac.wlanmac" />
+      </feature>
+    </config-file>
+    <config-file parent="/*" target="AndroidManifest.xml"></config-file>
+    <source-file src="src/android/wlanmac.java" target-dir="src/com/ifredom/wlanmac/wlanmac" />
+  </platform>
+</plugin>
