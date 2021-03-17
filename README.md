@@ -1,15 +1,17 @@
-# IpMacAddress plugin for Cordova / PhoneGap
+# wlanmac plugin for Cordova / PhoneGap
 
-很讨厌得地方在于，改一句原生代码，就得运行一次
-
-- cordova plugin add D:\mac-address-cordova-plugin\wlanmac
-- cordova run build
+- `wlanmac` is cordova plugin file (wlanmac 文件夹是插件，内含文档)
+- `cordovaproject` is a test project（测试项目）
 
 ## How to use? (如何使用)
 
 ```js
 cordova plugin add wlanmac
 ```
+
+## npm上传cordova插件
+
+## 创建cordova插件
 
 > 创建一个插件
 >

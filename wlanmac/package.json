@@ -1,11 +1,25 @@
 {
   "name": "wlanmac",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "cordova": {
+    "id": "cordova-plugin-wlanmac",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "wlanmac",
+    "mac",
+    "wlan",
+    "ip",
+    "cordova-android"
+  ],
   "author": "ifredom",
-  "license": "Apache - 2.0"
+  "license": "Apache 2.0",
+  "homepage": "https://github.com/ifredom/cordova-plugin-ip-mac-address/tree/main/wlanmac#readme"
 }
