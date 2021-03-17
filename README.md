@@ -246,4 +246,5 @@ cordova.plugins.wlanmac.coolMethod('Helloworld', success, error);
 [cordova官方文档](https://cordova.apache.org/docs/en/10.x/guide/cli/index.html)
 [plugman插件文档](https://cordova.apache.org/docs/en/latest/plugin_ref/plugman.html)
 [Android~获取WiFi MAC地址和IP方法汇总](https://blog.csdn.net/Bluechalk/article/details/87877008)
-[简化插件调用方法]](<https://www.cnblogs.com/VoiceOfDreams/p/11073447.html>)
+[简化插件调用方法](<https://www.cnblogs.com/VoiceOfDreams/p/11073447.html>)
+[android各版版本兼容](<https://www.jianshu.com/p/16d4ff4c4cbe>)
