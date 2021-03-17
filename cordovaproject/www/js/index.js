@@ -8,6 +8,7 @@ function onDeviceReady() {
     clickButton.addEventListener("click", function (params) {
         alert(cordova.platformId)
         WlanmacPlugin.coolMethod('Helloworld', success, error);
+        WlanmacPlugin.getMACAddress('', success, error);
         // cordova.plugins.wlanmac.coolMethod('Helloworld', success, error);
     }, false);
 
