@@ -57,7 +57,7 @@ cordova  create  cordovaproject com.ifredom  （创建cordova工程  <工程文�
 cd cordovaproject
 
 // 3. 为测试项目 cordovaplugin ，添加平台
-cordova platforms add android
+cordova platform add android@8.1.0
 
 // 4. 将新创建得插件，添加到测试项目test中 (使用本机绝对地址)
 // （发布之后可以使用另一种加载方式: 例如：cordova plugin add wlanmac

@@ -1,8 +1,8 @@
 {
   "name": "wlanmac",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "description": "cordova plugin for get device macAddress",
+  "main": "www/wlanmac.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,6 +11,10 @@
     "platforms": [
       "android"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ifredom/cordova-plugin-ip-mac-address.git"
   },
   "keywords": [
     "wlanmac",
@@ -21,5 +25,8 @@
   ],
   "author": "ifredom",
   "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/ifredom/cordova-plugin-ip-mac-address/tree/main/wlanmac/issues"
+  },
   "homepage": "https://github.com/ifredom/cordova-plugin-ip-mac-address/tree/main/wlanmac#readme"
 }
