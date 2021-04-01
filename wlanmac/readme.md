@@ -1,26 +1,30 @@
-# cordova插件 - wlanmac
+# wlanmac
 
-≥ android 7.0 获取设备Mac地址
+≥ Get mac address of Android device (获取 android 设备的 Mac 地址)
 
-## 如何使用
+## How to use? (如何使用)
 
 ```json
-// 添加插件
+// add plugin (添加插件)
 cordova plugin add wlanmac
 ```
 
 ```js
-// 调用
-document.addEventListener('deviceready', onDeviceReady, false);
+// call (调用)
+document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
-  WlanmacPlugin.getMACAddress('', success, error);
+  WlanmacPlugin.getMACAddress("", success, error);
 }
 
 function success(params) {
-    alert(`success callback: ${params}`)
+  alert(`success callback: ${params}`);
 }
 function error(params) {
-    alert("error callback")
+  alert("error callback");
 }
 ```
+
+## 已知问题
+
+gemonition android 7 可以获取

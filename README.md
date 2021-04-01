@@ -9,9 +9,9 @@
 cordova plugin add wlanmac
 ```
 
-## npm上传cordova插件
+## npm 上传 cordova 插件
 
-## 创建cordova插件
+## 创建 cordova 插件
 
 > 创建一个插件
 >
@@ -44,7 +44,7 @@ npm init
 // 5.修改src/android/wlanmac.java文件内容，完成自定义插件(默认不修改也可以运行)
 ```
 
-## 创建一个cordova新项目
+## 创建一个 cordova 新项目
 
 > 创建得新项目名称为： cordovaplugin
 > 在我本地得地址为： D:\mac-address-cordova-plugin\cordovaproject
@@ -66,6 +66,10 @@ cordova plugin add D:\mac-address-cordova-plugin\wlanmac
 // 5. 运行cordova项目
 cordova run android
 ```
+
+---
+
+> 其他： 删除插件 cordova plugin remove com.ifredom.wlanmac
 
 > wlanmac.java
 
@@ -109,11 +113,11 @@ public class wlanmac extends CordovaPlugin {
 
 ## 自定义插件内容
 
-上面两步，已经可以可以正常启动app了，自定义插件内容需要修改得地方
+上面两步，已经可以可以正常启动 app 了，自定义插件内容需要修改得地方
 
 - 1.`wlanmac/src/andorid/wlanmac.java` , 插件核心文件用于定义原生方法，必须重写 `action`
-- 2.`wlanmac/www/wlanmac.js`,必须自定义导出得js函数
-- 3.`cordovaproject/www/index.html`， 前两步完成插件编写，添加到测试cordorva项目。在测试cordorva项目中，使用html进行测试，调用前面两步定义得原生方法
+- 2.`wlanmac/www/wlanmac.js`,必须自定义导出得 js 函数
+- 3.`cordovaproject/www/index.html`， 前两步完成插件编写，添加到测试 cordorva 项目。在测试 cordorva 项目中，使用 html 进行测试，调用前面两步定义得原生方法
 - 4. 添加插件`cordova platforms add android` , 接着运行项目`cordova run android`
 
 > wlanmac.java
@@ -171,11 +175,11 @@ public class wlanmac extends CordovaPlugin {
 > 示例： wlanmac.js
 
 ```js
-var exec = require('cordova/exec');
+var exec = require("cordova/exec");
 // "wlanmac" 为 plugin.xml 中配置的 feature 的name名
 // "showToast" 为给 wlanmac.java判断的action名
 exports.showToast = function (arg0, success, error) {
-    exec(success, error, 'wlanmac', 'showToast', [arg0]);
+  exec(success, error, "wlanmac", "showToast", [arg0]);
 };
 ```
 
@@ -183,40 +187,44 @@ exports.showToast = function (arg0, success, error) {
 
 ```html
 <button id="test-button">测试按钮</button>
-<script>  
-document.addEventListener('deviceready', onDeviceReady, false);
+<script>
+  document.addEventListener("deviceready", onDeviceReady, false);
 
-function onDeviceReady() {
-    console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
-    document.getElementById('deviceready').classList.add('ready');
+  function onDeviceReady() {
+    console.log(
+      "Running cordova-" + cordova.platformId + "@" + cordova.version
+    );
+    document.getElementById("deviceready").classList.add("ready");
 
-    var clickButton = document.getElementById('test-button');
-    clickButton.addEventListener("click", function (params) {
-        alert(cordova.platformId)
-        cordova.plugins.wlanmac.coolMethod('Helloworld', success, error);
-    }, false);
+    var clickButton = document.getElementById("test-button");
+    clickButton.addEventListener(
+      "click",
+      function (params) {
+        alert(cordova.platformId);
+        cordova.plugins.wlanmac.coolMethod("Helloworld", success, error);
+      },
+      false
+    );
+  }
 
-}
-
-function success(params) {
+  function success(params) {
     console.log("success callback");
-    alert(`success callback: ${params}`)
-}
-function error(params) {
-    alert(`error callback: ${params}`)
-}
+    alert(`success callback: ${params}`);
+  }
+  function error(params) {
+    alert(`error callback: ${params}`);
+  }
 </script>
-
 ```
 
 ### 优化调用原生方法
 
 ```js
 // 调用优化后：
-WlanmacPlugin.coolMethod('Helloworld', success, error);
+WlanmacPlugin.coolMethod("Helloworld", success, error);
 
 // 调用优化前：
-cordova.plugins.wlanmac.coolMethod('Helloworld', success, error);
+cordova.plugins.wlanmac.coolMethod("Helloworld", success, error);
 ```
 
 ```xml
@@ -243,8 +251,8 @@ cordova.plugins.wlanmac.coolMethod('Helloworld', success, error);
 
 ### 参考资料
 
-[cordova官方文档](https://cordova.apache.org/docs/en/10.x/guide/cli/index.html)
-[plugman插件文档](https://cordova.apache.org/docs/en/latest/plugin_ref/plugman.html)
-[Android~获取WiFi MAC地址和IP方法汇总](https://blog.csdn.net/Bluechalk/article/details/87877008)
-[简化插件调用方法](<https://www.cnblogs.com/VoiceOfDreams/p/11073447.html>)
-[android各版版本兼容](<https://www.jianshu.com/p/16d4ff4c4cbe>)
+[cordova 官方文档](https://cordova.apache.org/docs/en/10.x/guide/cli/index.html)
+[plugman 插件文档](https://cordova.apache.org/docs/en/latest/plugin_ref/plugman.html)
+[Android~获取 WiFi MAC 地址和 IP 方法汇总](https://blog.csdn.net/Bluechalk/article/details/87877008)
+[简化插件调用方法](https://www.cnblogs.com/VoiceOfDreams/p/11073447.html)
+[android 各版版本兼容](https://www.jianshu.com/p/16d4ff4c4cbe)
