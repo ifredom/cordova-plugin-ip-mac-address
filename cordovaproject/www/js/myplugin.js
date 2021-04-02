@@ -13,6 +13,17 @@ function onDeviceReady() {
     },
     false
   );
+
+  addressimpl.request(
+    "getMACAddress",
+    JSON.stringify(params),
+    function (message) {
+      alert(message);
+    },
+    function () {
+      alert("Mac地址获取失败，尝试获取uuid");
+    }
+  );
 }
 
 function success(params) {

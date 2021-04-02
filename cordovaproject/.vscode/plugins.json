@@ -1,1 +1,1 @@
-{"plugins":["cordova-plugin-whitelist","com.ifredom.wlanmac"]}
+{"plugins":["cordova-plugin-whitelist","cordova-plugin-ip-mac-address","com.ifredom.wlanmac"]}

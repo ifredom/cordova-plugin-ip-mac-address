@@ -49,21 +49,21 @@ public class wlanmac extends CordovaPlugin {
             Context context = this.cordova.getActivity().getApplicationContext();
 
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+
                 // this.showToast("这里", callbackContext);
-                try {
-                    macAddress = getMacDefault(context);
-                } catch (Exception e) {
-                }
+                macAddress = getMacDefault(context);
 
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
                     && Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-                // try {
-                // macAddress = getMacFromFile();
-                // } catch (Exception e) {
-                // }
-                macAddress = getMacFromHardware();
+                try {
+                    macAddress = getMacFromFile();
+                } catch (Exception e) {
+                }
 
-                
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                macAddress = getMacFromHardware();
+            }
+
             callbackContext.success(macAddress);
 
             return true;
@@ -75,34 +75,34 @@ public class wlanmac extends CordovaPlugin {
      * * Android 5.0 （ version <= 5.0 ） ? Required permissions ! < uses-permission
      * android:name="android.permission.ACCESS_WIFI_STATE" />
      * 
-     * ? 获取mac地址有一点需要注意的就是android
-     * 6.0版本后，不管任何手机都会返回"02:00:00:00:00:00"这个默认的mac地址
+     * ? 获取mac地址有一点需要注意的就是android 6.0版本后，不管任何手机都会返回"02:00:00:00:00:00"这个默认的mac地址
      * .这是googel官方为了加强权限管理而禁用了 getSYstemService(Context.WIFI_SERVICE)方法来获得mac地址。
      */
 
-    private String getMacDefault(Context context) throws Exception {
+    private String getMacDefault(Context context) {
         String macAddress = "02:00:00:00:00:00";
 
-        if (context == null) {
-        return macAddress;
+        WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        if (wifi == null) {
+            return macAddress;
         }
-            WifiManager wifi = (WifiManager)
-        context.getSystemService(Context.WIFI_SERVICE);
-        if (wifi == null) { return macAddress;
-        }
-            WifiInfo info = null;
+        WifiInfo info = null;
         try {
-        info = wifi.getConnectionInfo();
-        } cat
-            }
-
-
+            info = wifi.getConnectionInfo();
+        } catch (Exception e) {
+        }
+        macAddress = info.getMacAddress();
+        return macAddress;
     }
 
-     Android 6.0（ version == 6.0 ） ? 由于Android底层基于Linux系统 可以根据shell获取
+    /**
+     * Android 6.0（version==6.0）?
      * 
+     * 由于Android底层基于Linux系统 可以根据shell获取
+     ** 
      * @return {WifiAddress}
      */
+
     private String getMacFromFile() throws Exception {
         String str = "";
         String macSerial = "";
@@ -118,8 +118,8 @@ public class wlanmac extends CordovaPlugin {
                     break;
                 }
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception err) {
+            err.printStackTrace();
         }
         if (macSerial == null || "".equals(macSerial)) {
             try {
