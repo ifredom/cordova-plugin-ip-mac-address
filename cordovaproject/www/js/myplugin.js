@@ -7,23 +7,23 @@ function onDeviceReady() {
   clickButton.addEventListener(
     "click",
     function (params) {
-      // WlanmacPlugin.coolMethod(success, error, "Helloworld");
+      WlanmacPlugin.coolMethod(success, error, "Helloworld");
       WlanmacPlugin.getMACAddress(success, error);
       // cordova.plugins.wlanmac.coolMethod('Helloworld', success, error);
     },
     false
   );
 
-  addressimpl.request(
-    "getMACAddress",
-    JSON.stringify(params),
-    function (message) {
-      alert(message);
-    },
-    function () {
-      alert("Mac地址获取失败，尝试获取uuid");
-    }
-  );
+  // addressimpl.request(
+  //   "getMACAddress",
+  //   JSON.stringify(params),
+  //   function (message) {
+  //     alert(message);
+  //   },
+  //   function () {
+  //     alert("Mac地址获取失败，尝试获取uuid");
+  //   }
+  // );
 }
 
 function success(params) {

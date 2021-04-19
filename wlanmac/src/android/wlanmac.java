@@ -21,10 +21,6 @@ import android.widget.Toast;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
-import java.util.Collections;
-import java.util.List;
-
-import java.io.*;
 
 import android.os.Build;
 
@@ -49,19 +45,10 @@ public class wlanmac extends CordovaPlugin {
             Context context = this.cordova.getActivity().getApplicationContext();
 
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-
                 // this.showToast("这里", callbackContext);
                 macAddress = getMacDefault(context);
-
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-                    && Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-                try {
-                    macAddress = getMacFromFile();
-                } catch (Exception e) {
-                }
-
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                macAddress = getMacFromHardware();
+            } else {
+                // macAddress = getMacFromHardware();
             }
 
             callbackContext.success(macAddress);
@@ -80,124 +67,42 @@ public class wlanmac extends CordovaPlugin {
      */
 
     private String getMacDefault(Context context) {
-        String macAddress = "02:00:00:00:00:00";
-
         WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        if (wifi == null) {
-            return macAddress;
-        }
-        WifiInfo info = null;
-        try {
-            info = wifi.getConnectionInfo();
-        } catch (Exception e) {
-        }
-        macAddress = info.getMacAddress();
+        WifiInfo winfo = wifi.getConnectionInfo();
+        String macAddress = winfo.getMacAddress();
         return macAddress;
-    }
-
-    /**
-     * Android 6.0（version==6.0）?
-     * 
-     * 由于Android底层基于Linux系统 可以根据shell获取
-     ** 
-     * @return {WifiAddress}
-     */
-
-    private String getMacFromFile() throws Exception {
-        String str = "";
-        String macSerial = "";
-        try {
-
-            Process pp = Runtime.getRuntime().exec("cat /sys/class/net/wlan0/address ");
-            InputStreamReader ir = new InputStreamReader(pp.getInputStream());
-            LineNumberReader input = new LineNumberReader(ir);
-            for (; null != str;) {
-                str = input.readLine();
-                if (str != null) {
-                    macSerial = str.trim();
-                    break;
-                }
-            }
-        } catch (Exception err) {
-            err.printStackTrace();
-        }
-        if (macSerial == null || "".equals(macSerial)) {
-            try {
-                return loadFileAsString("/sys/class/net/eth0/address").toUpperCase().substring(0, 17);
-            } catch (Exception e) {
-                e.printStackTrace();
-                macSerial = getMacFromHardware();
-            }
-        }
-        return macSerial;
     }
 
     /**
      * * Android 7.0（ version >= 7.0 ）
      */
-    private String getMacFromHardware() {
+    // private String getMacFromHardware() {
 
-        String macAddress = null;
-        StringBuffer buf = new StringBuffer();
-        NetworkInterface networkInterface = null;
-        try {
-            networkInterface = NetworkInterface.getByName("eth1");
-            if (networkInterface == null) {
-                networkInterface = NetworkInterface.getByName("wlan0");
-            }
-            if (networkInterface == null) {
-                return "02:00:00:00:00:02";
-            }
-            byte[] addr = networkInterface.getHardwareAddress();
-            for (byte b : addr) {
-                buf.append(String.format("%02X:", b));
-            }
-            if (buf.length() > 0) {
-                buf.deleteCharAt(buf.length() - 1);
-            }
-            macAddress = buf.toString();
-        } catch (SocketException e) {
-            e.printStackTrace();
-            return "02:00:00:00:00:02";
-        }
-        return macAddress;
-    }
-
-    private String loadFileAsString(String fileName) throws Exception {
-        FileReader reader = new FileReader(fileName);
-        String text = loadReaderAsString(reader);
-        reader.close();
-        return text;
-    }
-
-    private String loadReaderAsString(Reader reader) throws Exception {
-        StringBuilder builder = new StringBuilder();
-        char[] buffer = new char[4096];
-        int readLength = reader.read(buffer);
-        while (readLength >= 0) {
-            builder.append(buffer, 0, readLength);
-            readLength = reader.read(buffer);
-        }
-        return builder.toString();
-    }
-
-    /**
-     * 获取当前手机系统版本号
-     * 
-     * @return 系统版本号
-     */
-    public String getSystemVersion() {
-        return android.os.Build.VERSION.RELEASE;
-    }
-
-    /**
-     * 获取当前手机SDK版本号
-     * 
-     * @return SDK版本号
-     */
-    public int getSdkVersion() {
-        return android.os.Build.VERSION.SDK_INT;
-    }
+    //     String macAddress = null;
+    //     StringBuffer buf = new StringBuffer();
+    //     NetworkInterface networkInterface = null;
+    //     try {
+    //         networkInterface = NetworkInterface.getByName("eth1");
+    //         if (networkInterface == null) {
+    //             networkInterface = NetworkInterface.getByName("wlan0");
+    //         }
+    //         if (networkInterface == null) {
+    //             return "02:00:00:00:00:02";
+    //         }
+    //         byte[] addr = networkInterface.getHardwareAddress();
+    //         for (byte b : addr) {
+    //             buf.append(String.format("%02X:", b));
+    //         }
+    //         if (buf.length() > 0) {
+    //             buf.deleteCharAt(buf.length() - 1);
+    //         }
+    //         macAddress = buf.toString();
+    //     } catch (SocketException e) {
+    //         e.printStackTrace();
+    //         return "02:00:00:00:00:02";
+    //     }
+    //     return macAddress;
+    // }
 
     private void showToast(String message, CallbackContext callbackContext) {
         if (message != null && message.length() > 0) {
